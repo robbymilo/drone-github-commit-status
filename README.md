@@ -1,3 +1,5 @@
+[![Build Status](https://ci.rmilo.dev/api/badges/robbymilo/drone-github-commit-status/status.svg)](https://ci.rmilo.dev/robbymilo/drone-github-commit-status)
+
 # Drone GitHub Commit Status
 
 Send a custom commit status to a GitHub commit from Drone CI.
