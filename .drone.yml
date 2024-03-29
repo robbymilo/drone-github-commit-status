@@ -1,0 +1,36 @@
+---
+kind: pipeline
+type: docker
+name: drone-github-commit-status
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+  - name: build-push-image
+    image: plugins/docker
+    environment:
+      DOCKER_BUILDKIT: 1
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
+    settings:
+      platform: linux/amd64
+      repo: robbymilo/drone-github-commit-status
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+      tags:
+        - ${DRONE_COMMIT_SHA}
+        - latest
+
+trigger:
+  event:
+    - push
+
+volumes:
+  - name: dockersock
+    host:
+      path: /var/run/docker.sock
